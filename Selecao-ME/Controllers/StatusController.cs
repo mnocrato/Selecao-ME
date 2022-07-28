@@ -14,7 +14,7 @@ namespace Selecao_ME.Controllers
         public StatusController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
-        public async Task<IActionResult> Status([FromBody] StatusDTO status)
+        public async Task<IActionResult> ObterStatus([FromBody] StatusDTO status)
             => Result(await _mediator.Send(new StatusCommand(status)));
     }
 }

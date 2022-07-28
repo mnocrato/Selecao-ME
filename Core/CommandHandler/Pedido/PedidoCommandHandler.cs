@@ -28,7 +28,13 @@ namespace Core.CommandHandler.Pedido
             => CallFunction(() => ObterPedido(request));
 
         private void InserirNovoPedido(NovoPedidoCommand request)
-            => _pedidoRepository.Inserir(new Entidades.Pedido(request.NovoPedido.Pedido, JsonConvert.SerializeObject(request.NovoPedido.Itens)));
+        {
+            //Validação manual devido ao banco ser in-memory
+            if (_pedidoRepository.PedidoExiste(request.NovoPedido.Pedido))
+                throw new Exception("Pedido Duplicado");
+
+            _pedidoRepository.Inserir(new Entidades.Pedido(request.NovoPedido.Pedido, JsonConvert.SerializeObject(request.NovoPedido.Itens)));
+        }
 
         private void AlterarPedido(AlterarPedidoCommand request)
         {

@@ -2,27 +2,15 @@
 {
     public abstract class HandlerBase
     {
-        public Task<OperationResult<T>> CallFunction<T>(Func<T> function, Exception ex = null)
+        public Task<OperationResult<T>> CallFunction<T>(Func<T> function)
         {
             try
             {
                 return Task.FromResult(OperationResult.Success(function.Invoke()));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Task.FromResult(OperationResult.Error<T>(ex));
-            }
-        }
-
-        public Task<OperationResult<T>> CallFunction<T>(Func<Task<OperationResult<T>>> function)
-        {
-            try
-            {
-                return function.Invoke();
-            }
-            catch (Exception e)
-            {
-                return Task.FromResult(OperationResult.Error<T>(e));
             }
         }
 

@@ -11,5 +11,8 @@ namespace Data.Repository.Context
 
         public Pedido? RetornarPorNomePedido(string nomePedido)
             => _unitOfWork.Pedidos.FirstOrDefault(w => w.Nome == nomePedido);
+        
+        public bool PedidoExiste(string nomePedido)
+            => _unitOfWork.Pedidos.Any(w => w.Nome == nomePedido);
     }
 }

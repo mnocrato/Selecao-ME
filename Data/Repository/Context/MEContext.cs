@@ -6,6 +6,8 @@ namespace Data.Repository.Context
 {
     public class MEContext : DbContext, IUnitOfWork
     {
+        private bool _rolledback;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseInMemoryDatabase("Teste");
@@ -23,6 +25,13 @@ namespace Data.Repository.Context
             modelBuilder.Entity<Pedido>().Property("Itens").IsRequired();
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public void Rollback()
+        {
+            if (Database.CurrentTransaction == null || _rolledback) return;
+            Database.CurrentTransaction.Rollback();
+            _rolledback = true;
         }
     }
 }
