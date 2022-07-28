@@ -6,3 +6,7 @@
 nuget restore Selecao-ME.sln
 ```
 3. Rodar a aplicação normalmente em modo debug. 
+
+## Swagger
+
+A documento da API está disponivel na seguinte URL: `http://localhost:5115/swagger/index.html`
