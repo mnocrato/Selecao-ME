@@ -1,4 +1,4 @@
-## Passo-A-Passo
+## Instruções
 
 1. Abrir a solução **Selecao-ME.sln**.
 2. Caso os pacotes nuget não sejam restaurados automaticamente execute o seguinte comando.
